@@ -1,6 +1,6 @@
 /*Program to input values into an array and display them*/
 #include <stdio.h>
-main()
+int main()
 {
     int arr[5], i;
     for(i = 0; i < 5; i++)
