@@ -28,3 +28,42 @@ int main()
     value = eval_post();
     printf("Value of expression: %ld\n", value);
 }
+
+void infix_to_postfix()
+{
+    unsigned int i, p = 0;
+    char next, symbol;
+    for(i = 0; i < strlen(infix); i++)
+    {
+        symbol = infix[i];
+        if(!white_space(symbol))
+        {
+            switch (symbol)
+            {
+                case '(':
+                    push(symbol);
+                    break;
+                case ')':
+                    while((next = pop())!= '(')
+                        postfix[p++] = next;
+                    break;
+                case '+':
+                case '-':
+                case '*':
+                case '/':
+                case '%':
+                case '^':
+                    while(!isEmpty() && priority(stack[top]) >= priority(symbol))
+                        postfix[p++] = pop();
+                    push(symbol);
+                    break;
+            
+                default: /*if an operand comes*/
+                    postfix[p++] = symbol;
+            }
+        }
+    }
+    while(!isEmpty())
+        postfix[p++] = pop();
+    postfix[p] = '\0'; /*End postfix with '\0' to make it a string*/
+}
