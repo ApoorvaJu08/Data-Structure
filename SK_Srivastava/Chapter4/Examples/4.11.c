@@ -78,3 +78,13 @@ int white_space(char symbol)
     }
     
 }
+
+int isEmpty()
+{
+    if(top == -1)
+        return 1;
+    else
+    {
+        return 0;
+    }
+}
