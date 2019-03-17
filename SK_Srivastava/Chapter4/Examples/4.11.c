@@ -67,3 +67,14 @@ void infix_to_postfix()
         postfix[p++] = pop();
     postfix[p] = '\0'; /*End postfix with '\0' to make it a string*/
 }
+
+int white_space(char symbol)
+{
+    if(symbol == BLANK || symbol == TAB)
+        return 1;
+    else
+    {
+        return 0;
+    }
+    
+}
