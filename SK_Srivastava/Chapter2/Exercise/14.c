@@ -13,3 +13,4 @@ void func(int x, int *y)
     x = *y;
     *y = temp;
 }
+//First one is pass by value so the value does not change and second is pass by reference so value changes
