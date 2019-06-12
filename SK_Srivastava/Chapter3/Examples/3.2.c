@@ -227,7 +227,7 @@ struct node *create_list(struct node *start)
     printf("Enter the element to be inserted: ");
     scanf("%d", &data);
     start = addtoempty(start, data);
-    for(i = 2, i <= n; i++)
+    for(i = 2; i <= n; i++)
     {
         printf("Enter the element to be inserted: ");
         scanf("%d", &data);
