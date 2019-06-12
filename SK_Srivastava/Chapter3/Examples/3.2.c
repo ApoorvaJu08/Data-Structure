@@ -216,3 +216,22 @@ struct node *addbefore(struct node *start, int data, int item)
     printf("%d not present in the list\n", item);
     return start;
 }
+struct node *create_list(struct node *start)
+{
+    int i, n, data;
+    printf("Enter the number of nodes: \n");
+    scanf("%d", &n);
+    start = NULL;
+    if(n == 0)
+        return start;
+    printf("Enter the element to be inserted: ");
+    scanf("%d", &data);
+    start = addtoempty(start, data);
+    for(i = 2, i <= n; i++)
+    {
+        printf("Enter the element to be inserted: ");
+        scanf("%d", &data);
+        start = addatend(start, data);
+    }
+    return start;
+}
