@@ -235,3 +235,61 @@ struct node *create_list(struct node *start)
     }
     return start;
 }
+struct node *del(struct node *start, int data)
+{
+    struct node *tmp;
+    if(start == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    if(start -> next == NULL) /*deletion of the only node */
+    {
+        if(start -> info == data)
+        {
+            tmp = start;
+            start = NULL;
+            free(tmp);
+            return start;
+        }
+        else
+        {
+            printf("Element %d not found\n", data);
+            return start;
+        }
+    }
+    if(start -> info == data) /*deletion of first node */
+    {
+        tmp = start;
+        start = start -> next;
+        start -> prev = NULL;
+        free(tmp);
+        return start;
+    }
+    tmp = start -> next; /*deletion in between */
+    while(tmp -> next != NULL)
+    {
+        if(tmp -> info == data)
+        {
+            tmp -> prev -> next = tmp -> next;
+            tmp -> next -> prev = tmp -> prev;
+            free(tmp);
+            return start;
+        }
+        tmp = tmp -> next;
+    }
+    if(tmp -> info == data) /*deletion of last node */
+    {
+        tmp -> prev -> next = NULL;
+        free(tmp);
+        return start;
+    }
+    printf("Element %d not found\n", data);
+    return start;
+}
+
+//Practice
+//count
+//search
+//add at position
+//in del func - for deletion in btwn - tmp = start
