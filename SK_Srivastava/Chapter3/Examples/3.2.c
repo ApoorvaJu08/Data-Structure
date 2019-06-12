@@ -180,3 +180,39 @@ struct node *addafter(struct node *start, int data, int item)
     printf("%d not present in the list\n", item);
     return start;
 }
+struct node *addbefore(struct node *start, int data, int item)
+{
+    struct node *tmp, *q;
+    if(start == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    if(start -> info == item)
+    {
+        tmp = (struct node *)malloc(sizeof(struct node));
+        tmp -> info = data;
+        tmp -> prev = NULL;
+        tmp -> next = start;
+        start -> prev = tmp;
+        start = tmp;
+        return start;
+    }
+    q = start;
+    while(q != NULL)
+    {
+        if(q -> info == item)
+        {
+            tmp = (struct node *)malloc(sizeof(struct node));
+            tmp -> info = data;
+            tmp -> prev = q -> prev;
+            tmp -> next = q;
+            q -> prev -> next = tmp;
+            q -> prev = tmp;
+            return start;
+        }
+        q = q -> next;
+    }
+    printf("%d not present in the list\n", item);
+    return start;
+}
