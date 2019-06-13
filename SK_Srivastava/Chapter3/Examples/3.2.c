@@ -8,7 +8,7 @@ struct node {
 };
 struct node *create_list(struct node *start);
 void display(struct node *start);
-// void count(struct node *start);
+void count(struct node *start);
 // void search(struct node *start, int data);
 struct node *addtoempty(struct node *start, int data);
 struct node *addatbeg(struct node *start, int data);
@@ -26,7 +26,7 @@ int main()
     {
         printf("1. Create List\n");
         printf("2. Display\n");
-        // printf("3. Count\n");
+        printf("3. Count\n");
         // printf("4. Search\n");
         printf("13. Add to empty\n");
         printf("5. Add at beginning\n");
@@ -52,9 +52,9 @@ int main()
                 scanf("%d", &data);
                 start = addtoempty(start, data);
                 break;
-            // case 3:
-            //     count(start);
-            //     break;
+            case 3:
+                count(start);
+                break;
             // case 4:
             //     printf("Enter the element to be searched : ");
             //     scanf("%d", &data);
@@ -106,7 +106,17 @@ int main()
         }
     }
 }
-
+void count(struct node *start)
+{
+    struct node *p = start;
+    int cnt = 0;
+    while(p != NULL)
+    {
+        p = p -> next;
+        cnt++;
+    }
+    printf("The number of elements are: %d\n", cnt);
+}
 void display(struct node *start)
 {
     struct node *p;
@@ -186,7 +196,7 @@ struct node *addbefore(struct node *start, int data, int item)
     if(start == NULL)
     {
         printf("List is empty\n");
-        return;
+        return start;
     }
     if(start -> info == item)
     {
@@ -241,7 +251,7 @@ struct node *del(struct node *start, int data)
     if(start == NULL)
     {
         printf("List is empty\n");
-        return;
+        return start;
     }
     if(start -> next == NULL) /*deletion of the only node */
     {
