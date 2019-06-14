@@ -170,3 +170,22 @@ struct node *addafter(struct node *last, int data, int item)
     printf("%d not present in the list\n", item);
     return last;
 }
+struct node *create_list(struct node *last)
+{
+    int i, n, data;
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+    last = NULL;
+    if(n = 0)
+        return last;
+    printf("Enter the element to be inserted: ");
+    scanf("%d", &data);
+    last = addtoempty(last, data);
+    for(i = 2; i <= n; i++)
+    {
+        printf("Enter the element to be inserted: ");
+        scanf("%d", &data);
+        last = addatend(last, data);
+    }
+    return last;
+}
