@@ -13,7 +13,7 @@ struct node *addatbeg(struct node *start, int data);
 struct node *addatend(struct node *start, int data);
 struct node *addafter(struct node *start, int data, int item);
 struct node *addbefore(struct node *start, int data, int item);
-struct node *addatpos(struct node *start, int data, int item);
+struct node *addatpos(struct node *start, int data, int pos);
 struct node *del(struct node *start, int data);
 struct node *reverse(struct node *start);
 int main()
@@ -80,7 +80,7 @@ int main()
                 printf("Enter the element to be inserted");
                 scanf("%d", &data);
                 printf("Enter the position at which to insert");
-                scanf("%d", &item);
+                scanf("%d", &pos);
                 start = addatpos(start, data, pos);
                 break;
             case 10:
@@ -229,12 +229,15 @@ struct node *addatpos(struct node *start, int data, int pos)
         return start;
     }
     p = start;
-    for(i = 1; i < pos-1 && p != NULL; i++)
+    for(i = 0; i < pos-1 && p != NULL; i++)
     {
         p = p -> link;
     }
-    if(p==NULL)
+    if(p == NULL)
+    {  
         printf("There are less than %d elements\n", pos);
+        return start;
+    }
     else
     {
         tmp -> link = p -> link;
