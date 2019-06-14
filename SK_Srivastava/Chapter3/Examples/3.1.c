@@ -81,7 +81,7 @@ int main()
                 scanf("%d", &data);
                 printf("Enter the position at which to insert");
                 scanf("%d", &item);
-                start = addafter(start, data, pos);
+                start = addatpos(start, data, pos);
                 break;
             case 10:
                 printf("Enter the element to be deleted : ");
