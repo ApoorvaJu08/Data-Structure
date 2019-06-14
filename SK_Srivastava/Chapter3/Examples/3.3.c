@@ -189,3 +189,48 @@ struct node *create_list(struct node *last)
     }
     return last;
 }
+struct node *del(struct node *last, int data)
+{
+    struct node *tmp, *p;
+    if(last == NULL)
+    {
+        printf("List is empty\n");
+        return last;
+    }
+    if(last -> link == last && last -> info == data) /*Deletion of the only node */
+    {
+        tmp = last;
+        last = NULL;
+        free(tmp);
+        return last;
+    }
+    if(last -> link -> info == data) /*Deletion of first node */
+    {
+        tmp = last -> link;
+        last -> link = tmp -> link;
+        free(tmp);
+        return last;
+    }
+    p = last -> link; /*Deletion in between */
+    while(p -> link != last)
+    {
+        if(p -> link -> info == data)
+        {
+            tmp = p -> link;
+            p -> link = tmp -> link;
+            free(tmp);
+            return last;
+        }
+        p = p -> link;
+    }
+    if(last -> info == data) /*Deletion of last node */
+    {
+        tmp = last;
+        p -> link = last -> link;
+        last = p;
+        free(tmp);
+        return last;
+    }
+    printf("Element %d not found\n", data);
+    return last;
+}
