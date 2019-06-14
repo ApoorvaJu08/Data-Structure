@@ -15,7 +15,7 @@ struct node *addatbeg(struct node *start, int data);
 struct node *addatend(struct node *start, int data);
 struct node *addafter(struct node *start, int data, int item);
 struct node *addbefore(struct node *start, int data, int item);
-// struct node *addatpos(struct node *start, int data, int item);
+struct node *addatpos(struct node *start, int data, int pos);
 struct node *del(struct node *start, int data);
 struct node *reverse(struct node *start);
 int main()
@@ -33,7 +33,7 @@ int main()
         printf("6. Add at end\n");
         printf("7. Add after node\n");
         printf("8. Add before node\n");
-        // printf("9. Add at position\n");
+        printf("9. Add at position\n");
         printf("10. Delete\n");
         printf("11. Reverse\n");
         printf("12. Quit\n");
@@ -84,13 +84,13 @@ int main()
                 scanf("%d", &item);
                 start = addafter(start, data, item);
                 break;
-            // case 9:
-            //     printf("Enter the element to be inserted");
-            //     scanf("%d", &data);
-            //     printf("Enter the position at which to insert");
-            //     scanf("%d", &item);
-            //     start = addatpos(start, data, pos);
-            //     break;
+            case 9:
+                printf("Enter the element to be inserted");
+                scanf("%d", &data);
+                printf("Enter the position at which to insert");
+                scanf("%d", &pos);
+                start = addatpos(start, data, pos);
+                break;
             case 10:
                 printf("Enter the element to be deleted : ");
                 scanf("%d", &data);
@@ -105,6 +105,32 @@ int main()
                 printf("Wrong choice\n");
         }
     }
+}
+struct node *addatpos(struct node *start, int data, int pos)
+{
+    int i;
+    struct node *tmp, *p;
+    tmp = (struct node *)malloc(sizeof(struct node));
+    tmp -> info = data;
+    if(pos == 1)
+    {
+        tmp -> next = start;
+        // tmp -> prev = NULL;
+        start = tmp;
+        return start;
+    }
+    p = start;
+    for(i = 1; i < pos - 1 && p != NULL; i++)
+        p = p -> next;
+    if(p == NULL)
+        printf("There are less than %d elements\n", pos);
+    else
+    {
+        tmp -> next = p -> next;
+        // tmp -> prev = p;
+        p -> next = tmp;
+    }
+    return start;
 }
 void count(struct node *start)
 {
@@ -331,8 +357,3 @@ struct node *reverse(struct node *start)
     printf("List reversed\n");
     return start;
 }
-
-//Practice
-//search
-//add at position
-//in del func - for deletion in btwn - tmp = start
