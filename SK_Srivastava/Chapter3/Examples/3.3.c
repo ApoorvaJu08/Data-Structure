@@ -14,7 +14,7 @@ struct node *addatbeg(struct node *last, int data);
 struct node *addatend(struct node *last, int data);
 struct node *addafter(struct node *last, int data, int item);
 // struct node *addbefore(struct node *last, int data, int item);
-// struct node *addatpos(struct node *last, int data, int item);
+// struct node *addatpos(struct node *last, int data, int pos);
 struct node *del(struct node *last, int data);
 // struct node *reverse(struct node *last);
 int main()
@@ -82,8 +82,8 @@ int main()
                 printf("Enter the element to be inserted");
                 scanf("%d", &data);
                 printf("Enter the position at which to insert");
-                scanf("%d", &item);
-                last = addafter(last, data, pos);
+                scanf("%d", &pos);
+                last = addatpos(last, data, pos);
                 break;
             case 10:
                 printf("Enter the element to be deleted : ");
@@ -147,5 +147,26 @@ struct node *addatend(struct node *last, int data)
     tmp -> link = last -> link;
     last -> link = tmp;
     last = tmp;
+    return last;
+}
+struct node *addafter(struct node *last, int data, int item)
+{
+    struct node *tmp, *p;
+    p = last -> link;
+    do
+    {
+        if(p -> info == item)
+        {
+            tmp = (struct node *)malloc(sizeof(struct node));
+            tmp -> info = data;
+            tmp -> link = p -> link;
+            p -> link = tmp;
+            if(p == last)
+                last = tmp;
+            return last;
+        }
+        p = p -> link;
+    } while (p != last-> link);
+    printf("%d not present in the list\n", item);
     return last;
 }
