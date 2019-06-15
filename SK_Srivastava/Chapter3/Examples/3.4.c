@@ -183,3 +183,21 @@ struct node *addatpos(struct node *head, int data, int pos)
     p -> link = tmp;
     return head;
 }
+struct node *del(struct node *head, int data)
+{
+    struct node *tmp, *p;
+    p = head;
+    while(p -> link != NULL)
+    {
+        if(p -> link -> info == data)
+        {
+            tmp = p -> link;
+            p -> link = tmp -> link;
+            free(tmp);
+            return head;
+        }
+        p = p -> link;
+    }
+    printf("Element %d not found\n", data);
+    return head;
+}
