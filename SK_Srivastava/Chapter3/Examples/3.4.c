@@ -102,3 +102,16 @@ int main()
         }
     }
 }
+struct node *create_list(struct node *head)
+{
+    int i, n, data;
+    printf("Enter the number of nodes: ");
+    scanf("%d", &n);
+    for(i = 1; i <= n; i++)
+    {
+        printf("Enter the element to be inserted: ");
+        scanf("%d", &data);
+        head = addatend(head, data);
+    }
+    return head;
+}
