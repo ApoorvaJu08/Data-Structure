@@ -115,3 +115,20 @@ struct node *create_list(struct node *head)
     }
     return head;
 }
+void display(struct node *head)
+{
+    struct node *p;
+    if(head -> link == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    p = head -> link;
+    printf("List is: \n");
+    while(p != NULL)
+    {
+        printf("%d ", p -> info);
+        p = p -> link;
+    }
+    printf("\n");
+}
