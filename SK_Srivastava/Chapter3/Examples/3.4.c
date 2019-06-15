@@ -201,3 +201,18 @@ struct node *del(struct node *head, int data)
     printf("Element %d not found\n", data);
     return head;
 }
+struct node *reverse(struct node *head)
+{
+    struct node *prev, *ptr, *next;
+    prev = NULL;
+    ptr = head -> link;
+    while(ptr != NULL)
+    {
+        next = ptr -> link;
+        ptr -> link = prev;
+        prev = ptr;
+        ptr = next;
+    }
+    head -> link = prev;
+    return head;
+}
