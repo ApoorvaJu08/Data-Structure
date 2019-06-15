@@ -93,3 +93,20 @@ void search(struct node *start, int data)
     }
     printf("%d not found in list\n", data);
 }
+void display(struct node *start)
+{
+    struct node *q;
+    if(start == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    q = start;
+    printf("List is: \n");
+    while(q != NULL)
+    {
+        printf("%d", q -> info);\
+        q = q -> info;
+    }
+    printf("\n");
+}
