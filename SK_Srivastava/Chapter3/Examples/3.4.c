@@ -144,3 +144,22 @@ struct node *addatend(struct node *head, int data)
     tmp -> link = NULL;
     return head;
 }
+struct node *addbefore(struct node *head, int data, int item)
+{
+    struct node *tmp, *p;
+    p = head;
+    while( p -> link != NULL)
+    {
+        if(p -> link -> info == item)
+        {
+            tmp = (struct node *)malloc(sizeof(struct node));
+            tmp -> info = data;
+            tmp -> link = p -> link;
+            p -> link = tmp;
+            return head;
+        }
+        p = p -> link;
+    }
+    printf("%d not present in the list\n", item);
+    return head;
+}
