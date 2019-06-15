@@ -70,3 +70,26 @@ struct node *insert_s(struct node *start, int data)
     }
     return start;
 }
+void search(struct node *start, int data)
+{
+    struct node *p;
+    int pos;
+    if(start == NULL || data < start -> info)
+    {
+        printf("%d not found in list \n", data);
+        return;
+    }
+    p = start;
+    pos = 1;
+    while(p != NULL && p -> info <= data)
+    {
+        if(p -> info == data)
+        {
+            printf("%d found at position %d\n", data, pos);
+            return;
+        }
+        p = p -> link;
+        pos++;
+    }
+    printf("%d not found in list\n", data);
+}
