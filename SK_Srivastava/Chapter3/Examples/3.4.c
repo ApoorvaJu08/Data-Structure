@@ -163,3 +163,23 @@ struct node *addbefore(struct node *head, int data, int item)
     printf("%d not present in the list\n", item);
     return head;
 }
+struct node *addatpos(struct node *head, int data, int pos)
+{
+    struct node *tmp, *p;
+    int i;
+    tmp = (struct node *)malloc(sizeof(struct node));
+    tmp -> info = data;
+    p = head;
+    for(i = 1; i <= pos-1; i++)
+    {
+        p = p -> link;
+        if(p == NULL)
+        {
+            printf("There are less than %d elements\n", pos);
+            return head;
+        }
+    }
+    tmp -> link = p -> link;
+    p -> link = tmp;
+    return head;
+}
