@@ -48,3 +48,25 @@ int main()
         }
     }
 }
+struct node *insert_s(struct node *start, int data)
+{
+    struct node *p, *tmp;
+    tmp = (struct node *)malloc(sizeof(struct node));
+    tmp -> info = data;
+    /*list empty or new node to be added before first node */
+    if(start == NULL || data < start -> info)
+    {
+        tmp -> link = start;
+        start = tmp;
+        return start;
+    }
+    else
+    {
+        p = start;
+        while(p -> link != NULL && p -> link -> info < data)
+            p = p -> link;
+        tmp -> link = p -> link;
+        p -> link = tmp;
+    }
+    return start;
+}
