@@ -76,7 +76,7 @@ int main()
                 scanf("%d", &data);
                 printf("Enter the element before which to insert");
                 scanf("%d", &item);
-                last = addafter(last, data, item);
+                last = addbefore(last, data, item);
                 break;
             case 9:
                 printf("Enter the element to be inserted");
