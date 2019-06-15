@@ -132,3 +132,15 @@ void display(struct node *head)
     }
     printf("\n");
 }
+struct node *addatend(struct node *head, int data)
+{
+    struct node *p, *tmp;
+    tmp = (struct node *)malloc(sizeof(struct node));
+    tmp -> info = data;
+    p = head;
+    while(p -> link != NULL)
+        p = p -> link;
+    p -> link = tmp;
+    tmp -> link = NULL;
+    return head;
+}
