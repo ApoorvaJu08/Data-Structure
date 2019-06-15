@@ -66,13 +66,13 @@ int main()
                 scanf("%d", &data);
                 head = addatend(head, data);
                 break;
-            case 7:
-                printf("Enter the element to be inserted");
-                scanf("%d", &data);
-                printf("Enter the element after which to insert");
-                scanf("%d", &item);
-                head = addafter(head, data, item);
-                break;
+            // case 7:
+            //     printf("Enter the element to be inserted");
+            //     scanf("%d", &data);
+            //     printf("Enter the element after which to insert");
+            //     scanf("%d", &item);
+            //     head = addafter(head, data, item);
+            //     break;
             case 8:
                 printf("Enter the element to be inserted");
                 scanf("%d", &data);
