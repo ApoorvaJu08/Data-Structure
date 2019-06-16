@@ -106,7 +106,7 @@ void display(struct node *start)
     while(q != NULL)
     {
         printf("%d", q -> info);\
-        q = q -> info;
+        q = q -> link;
     }
     printf("\n");
 }

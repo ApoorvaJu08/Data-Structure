@@ -46,14 +46,14 @@ int main()
             case 2:
                 display(last);
                 break;
-            case 3:
-                count(last);
-                break;
-            case 4:
-                printf("Enter the element to be searched : ");
-                scanf("%d", &data);
-                search(last, data);
-                break;
+            // case 3:
+            //     count(last);
+            //     break;
+            // case 4:
+            //     printf("Enter the element to be searched : ");
+            //     scanf("%d", &data);
+            //     search(last, data);
+            //     break;
             case 5:
                 printf("Enter the element to be inserted : ");
                 scanf("%d", &data);
@@ -71,28 +71,28 @@ int main()
                 scanf("%d", &item);
                 last = addafter(last, data, item);
                 break;
-            case 8:
-                printf("Enter the element to be inserted");
-                scanf("%d", &data);
-                printf("Enter the element before which to insert");
-                scanf("%d", &item);
-                last = addbefore(last, data, item);
-                break;
-            case 9:
-                printf("Enter the element to be inserted");
-                scanf("%d", &data);
-                printf("Enter the position at which to insert");
-                scanf("%d", &pos);
-                last = addatpos(last, data, pos);
-                break;
+            // case 8:
+            //     printf("Enter the element to be inserted");
+            //     scanf("%d", &data);
+            //     printf("Enter the element before which to insert");
+            //     scanf("%d", &item);
+            //     last = addbefore(last, data, item);
+            //     break;
+            // case 9:
+            //     printf("Enter the element to be inserted");
+            //     scanf("%d", &data);
+            //     printf("Enter the position at which to insert");
+            //     scanf("%d", &pos);
+            //     last = addatpos(last, data, pos);
+            //     break;
             case 10:
                 printf("Enter the element to be deleted : ");
                 scanf("%d", &data);
                 last = del(last, data);
                 break;
-            case 11:
-                last = reverse(last);
-                break;
+            // case 11:
+            //     last = reverse(last);
+            //     break;
             case 12:
                 exit(1);
             case 13:
@@ -176,7 +176,7 @@ struct node *create_list(struct node *last)
     printf("Enter the number of nodes: ");
     scanf("%d", &n);
     last = NULL;
-    if(n = 0)
+    if(n == 0)
         return last;
     printf("Enter the element to be inserted: ");
     scanf("%d", &data);
