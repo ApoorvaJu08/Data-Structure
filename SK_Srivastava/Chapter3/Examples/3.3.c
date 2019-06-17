@@ -8,7 +8,7 @@ struct node {
 struct node *create_list(struct node *last);
 void display(struct node *last);
 void count(struct node *last);
-// void search(struct node *last, int data);
+void search(struct node *last, int data);
 struct node *addtoempty(struct node *last, int data);
 struct node *addatbeg(struct node *last, int data);
 struct node *addatend(struct node *last, int data);
@@ -26,7 +26,7 @@ int main()
         printf("1. Create List\n");
         printf("2. Display\n");
         printf("3. Count\n");
-        // printf("4. Search\n");
+        printf("4. Search\n");
         printf("5. Add at beginning\n");
         printf("6. Add at end\n");
         printf("7. Add after node\n");
@@ -49,11 +49,11 @@ int main()
             case 3:
                 count(last);
                 break;
-            // case 4:
-            //     printf("Enter the element to be searched : ");
-            //     scanf("%d", &data);
-            //     search(last, data);
-            //     break;
+            case 4:
+                printf("Enter the element to be searched : ");
+                scanf("%d", &data);
+                search(last, data);
+                break;
             case 5:
                 printf("Enter the element to be inserted : ");
                 scanf("%d", &data);
@@ -132,6 +132,22 @@ void count(struct node *last)
         cnt++;
     }
     printf("Number of elements are %d\n", cnt);
+}
+void search(struct node *last, int data)
+{
+    struct node *p = last -> link;
+    int pos = 1;
+    do
+    {
+        if(p -> info == data)
+        {
+            printf("Item %d found at position %d\n", data, pos);
+            return;
+        }
+        p = p -> link;
+        pos++;
+    }while(p != last->link);
+    printf("Item %d not found in the list\n", data);
 }
 struct node *addatbeg(struct node *last, int data)
 {
