@@ -13,7 +13,7 @@ struct node *addtoempty(struct node *last, int data);
 struct node *addatbeg(struct node *last, int data);
 struct node *addatend(struct node *last, int data);
 struct node *addafter(struct node *last, int data, int item);
-// struct node *addbefore(struct node *last, int data, int item);
+struct node *addbefore(struct node *last, int data, int item);
 // struct node *addatpos(struct node *last, int data, int pos);
 struct node *del(struct node *last, int data);
 // struct node *reverse(struct node *last);
@@ -30,7 +30,7 @@ int main()
         printf("5. Add at beginning\n");
         printf("6. Add at end\n");
         printf("7. Add after node\n");
-        // printf("8. Add before node\n");
+        printf("8. Add before node\n");
         // printf("9. Add at position\n");
         printf("10. Delete\n");
         // printf("11. Reverse\n");
@@ -71,13 +71,13 @@ int main()
                 scanf("%d", &item);
                 last = addafter(last, data, item);
                 break;
-            // case 8:
-            //     printf("Enter the element to be inserted");
-            //     scanf("%d", &data);
-            //     printf("Enter the element before which to insert");
-            //     scanf("%d", &item);
-            //     last = addbefore(last, data, item);
-            //     break;
+            case 8:
+                printf("Enter the element to be inserted");
+                scanf("%d", &data);
+                printf("Enter the element before which to insert");
+                scanf("%d", &item);
+                last = addbefore(last, data, item);
+                break;
             // case 9:
             //     printf("Enter the element to be inserted");
             //     scanf("%d", &data);
@@ -196,6 +196,25 @@ struct node *addafter(struct node *last, int data, int item)
         p = p -> link;
     } while (p != last-> link);
     printf("%d not present in the list\n", item);
+    return last;
+}
+struct node *addbefore(struct node *last, int data, int item)
+{
+    struct node *tmp, *p;
+    p = last -> link;
+    do
+    {
+        if(p -> link -> info == item)
+        {
+            tmp = (struct node *)malloc(sizeof(struct node));
+            tmp -> info = data;
+            tmp -> link = p -> link;
+            p -> link = tmp;
+            return last;
+        }
+        p = p -> link;
+    } while (p != last -> link);
+    printf("Item %d not present in the list\n", item);
     return last;
 }
 struct node *create_list(struct node *last)
