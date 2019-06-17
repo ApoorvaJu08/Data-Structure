@@ -7,7 +7,7 @@ struct node {
 };
 struct node *create_list(struct node *last);
 void display(struct node *last);
-// void count(struct node *last);
+void count(struct node *last);
 // void search(struct node *last, int data);
 struct node *addtoempty(struct node *last, int data);
 struct node *addatbeg(struct node *last, int data);
@@ -25,7 +25,7 @@ int main()
     {
         printf("1. Create List\n");
         printf("2. Display\n");
-        // printf("3. Count\n");
+        printf("3. Count\n");
         // printf("4. Search\n");
         printf("5. Add at beginning\n");
         printf("6. Add at end\n");
@@ -46,9 +46,9 @@ int main()
             case 2:
                 display(last);
                 break;
-            // case 3:
-            //     count(last);
-            //     break;
+            case 3:
+                count(last);
+                break;
             // case 4:
             //     printf("Enter the element to be searched : ");
             //     scanf("%d", &data);
@@ -120,6 +120,18 @@ void display(struct node *last)
         p = p -> link;
     } while (p != last -> link);
     printf("\n");
+}
+void count(struct node *last)
+{
+    struct node *p;
+    p = last;
+    int cnt = 1;
+    while(p -> link != last)
+    {
+        p = p -> link;
+        cnt++;
+    }
+    printf("Number of elements are %d\n", cnt);
 }
 struct node *addatbeg(struct node *last, int data)
 {
