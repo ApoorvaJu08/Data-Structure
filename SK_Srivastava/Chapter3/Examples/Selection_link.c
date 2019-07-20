@@ -34,3 +34,9 @@ struct node *selection(struct node *start)
     }
     return start;
 }
+
+/*Explanation */
+/*If the value in node pointed by p is greater than the value in node pointed by q then we will have to 
+change the links such that the position of these nodes in list are exchanged. For changing the positions 
+we will need the address of predecessor nodes also. So we will take two more pointers r and s which will
+point to the predecessors of nodes pointed by p and q respectively. */
