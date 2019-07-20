@@ -38,7 +38,7 @@ void merge(struct node *p1, struct node *p2)
             start3 = insert(start3, p2 -> info);
             p2 = p2 -> link;
         }
-        else if(p1 -> info == p2 -> link)
+        else if(p1 -> info == p2 -> info)
         {
             start3 = insert(start3, p1 -> info);
             p1 = p1 -> link;
