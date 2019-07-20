@@ -8,7 +8,6 @@ int main()
     ptr = fun(arr, n);
     printf("arr = %p, ptr = %p, *Ptr = %d\n", arr, ptr, *ptr);
 }
-
 int *fun(int *p, int n)
 {
     p = p+n;

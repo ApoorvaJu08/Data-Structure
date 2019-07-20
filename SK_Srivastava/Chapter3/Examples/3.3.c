@@ -217,6 +217,33 @@ struct node *addbefore(struct node *last, int data, int item)
     printf("Item %d not present in the list\n", item);
     return last;
 }
+// struct node *addatpos(struct node *last, int data, int pos)
+// {
+//     struct node *tmp, *p;
+//     int i;
+//     tmp = (struct node *)malloc(sizeof(struct node));
+//     tmp -> info = data;
+//     if(pos == 1)
+//     {
+//         tmp = last -> link;
+//         last -> link = tmp;
+//         return last;
+//     }
+//     p = last -> link;
+//     for(i = 0; i < pos - 1 && p != last -> link; i++)
+//         p = p -> link;
+//     if(p == last -> link)
+//     {
+//         printf("There are less than %d elements\n", pos);
+//         return last;
+//     }
+//     else
+//     {
+//         tmp -> link = p -> link;
+//         p -> link = tmp;
+//         return last;
+//     }  
+// }
 struct node *create_list(struct node *last)
 {
     int i, n, data;
