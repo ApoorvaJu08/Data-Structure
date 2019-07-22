@@ -25,6 +25,8 @@ int main()
     display(start1);
     printf("Polynomial 2 is: ");
     display(start2);
+    poly_add(start1, start2);
+    poly_mult(start1, start2);
 }
 
 struct node *create(struct node *start)
@@ -42,4 +44,132 @@ struct node *create(struct node *start)
         start = insert_s(start, co, ex);
     }
     return start;
+}
+
+struct node *insert_s(struct node *start, float co, int ex)
+{
+    struct node *ptr, *tmp;
+    tmp = (struct node *)malloc(sizeof(struct node));
+    tmp -> coef = co;
+    tmp -> expo = ex;
+    /*list empty or greater than first one */
+    if(start == NULL || ex > start -> expo)
+    {
+        tmp -> link = start;
+        start = tmp;
+    }
+    else
+    {
+        ptr = start;
+        while(ptr -> link != NULL && ptr -> link -> expo >= ex)
+            ptr = ptr -> link;
+        tmp -> link = ptr -> link;
+        ptr -> link = tmp;
+    }
+    return start;
+}
+
+struct node *insert(struct node *start, float co, int ex)
+{
+    struct node *ptr, *tmp;
+    tmp = (struct node *)malloc(sizeof(struct node));
+    tmp -> coef = co;
+    tmp -> expo = ex;
+    if(start == NULL) /*if list is empty */
+    {
+        tmp -> link = start;
+        start = tmp;
+    }
+    else
+    {
+        ptr = start;
+        while(ptr -> link != NULL)
+            ptr = ptr -> link;
+        tmp -> link = ptr -> link;
+        ptr -> link = tmp;
+    }
+    return start;
+}
+
+void display(struct node *ptr)
+{
+    if(ptr == NULL)
+    {
+        printf("Zero polynomial\n");
+        return;
+    }
+    while(ptr != NULL)
+    {
+        printf("(%.1fx^%d)", ptr -> coef, ptr -> expo);
+        ptr = ptr -> link;
+        if(ptr != NULL)
+            printf(" + ");
+        else
+        {
+            printf("\n");
+        }
+    }    
+}
+
+void poly_add(struct node *p1, struct node *p2)
+{
+    struct node *start3;
+    start3 = NULL;
+    while(p1 != NULL && p2 != NULL)
+    {
+        if(p1 -> expo > p2 -> expo)
+        {
+            start3 = insert(start3, p1 -> coef, p1 -> expo);
+            p1 = p1 -> link;
+        }
+        else if(p2 -> expo > p1 -> expo)
+        {
+            start3 = insert(start3, p2 -> coef, p2 -> expo);
+            p2 = p2 -> link;
+        }
+        else if(p1 -> expo == p2 -> expo)
+        {
+            start3 = insert(start3, p1 -> coef + p2 -> coef, p1 -> expo);
+            p1 = p1 -> link;
+            p2 = p2 -> link;
+        }
+    }
+    /*if poly2 has finished and elements left in poly1 */
+    while(p1 != NULL)
+    {
+        start3 = insert(start3, p1 -> coef, p1 -> expo);
+        p1 = p1 -> link;
+    }
+    /*if poly1 has finished and elements left in poly2 */
+    while(p2 != NULL)
+    {
+        start3 = insert(start3, p2 -> coef, p2 -> expo);
+        p2 = p2 -> link;
+    }
+    printf("Added polynomial is: ");
+    display(start3);
+}
+
+void poly_mult(struct node *p1, struct node *p2)
+{
+    struct node *start3;
+    struct node *p2_beg = p2;
+    start3 = NULL;
+    if(p1 == NULL || p2 == NULL)
+    {
+        printf("Multiplied polynomial is zero polynomial\n");
+        return;
+    }
+    while(p1 != NULL)
+    {
+        p2 = p2_beg;
+        while(p2 != NULL)
+        {
+            start3 = insert_s(start3, p1 -> coef * p2 -> coef, p1 -> expo + p2 -> expo);
+            p2 = p2 -> link;
+        }
+        p1 = p1 -> link;
+    }
+    printf("MUltiplied polynomial is : ");
+    display(start3);
 }
