@@ -4,13 +4,11 @@
 struct node {
     int info;
     struct node *link;
-};
-struct node *top = NULL;
+}*top = NULL;
 void push(int item);
 int pop();
 int peek();
 int isEmpty();
-int isFull();
 void display();
 int main()
 {
@@ -55,7 +53,7 @@ void push(int item)
     tmp = (struct node *)malloc(sizeof(struct node));
     if(tmp == NULL)
     {
-        printf("Stack underflow\n");
+        printf("Stack overflow\n");
         return;
     }
     tmp -> info = item;
@@ -65,5 +63,54 @@ void push(int item)
 
 int pop()
 {
-    
+    struct node *tmp;
+    int item;
+    if(isEmpty())
+    {
+        print("Stack Underflow\n");
+        exit(1);
+    }
+    tmp = top;
+    item = tmp -> info;
+    top = top -> link;
+    free(tmp);
+    return item;
+}
+
+int peek()
+{
+    if(isEmpty())
+    {
+        printf("Stack Underflow\n");
+        exit(1);
+    }
+    return top -> info;
+}
+
+int isEmpty()
+{
+    if(top == NULL)
+        return 1;
+    else
+    {
+        return 0;
+    }
+}
+
+void display()
+{
+    struct node *ptr;
+    ptr = top;
+    if(isEmpty())
+    {
+        printf("Stack is Empty\n");
+        return;
+    }
+    printf("Stack Elements: \n");
+    while(ptr != NULL)
+    {
+        printf("%d\n", ptr -> info);
+        ptr = ptr -> link;
+    }
+    printf("\n");
 }
