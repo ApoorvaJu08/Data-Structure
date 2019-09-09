@@ -81,7 +81,7 @@ int white_space(char symbol)
 
 int isEmpty()
 {
-    if(top == -1)
+    if(top == -1) /*empty*/
         return 1;
     else
     {
