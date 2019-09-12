@@ -89,3 +89,4 @@ void nrec_pre(struct node *root)
     }
     printf("\n");
 }
+/*non-recursive going on*/
