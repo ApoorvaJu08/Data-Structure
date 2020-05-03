@@ -1,13 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX 50
 struct node {
     struct node *lchild;
     int info;
     struct node *rchild;
 };
+struct node *stack[MAX];
+int top = -1;
+void push_stack(struct node *item);
+struct node *pop_stack();
+int stack_empty();
 void preorder(struct node *ptr);
 void inorder(struct node *ptr);
 void postorder(struct node *ptr);
+void preorder_nrec(struct node *ptr);
+void inorder_nrec(struct node *ptr);
+void postorder_nrec(struct node *ptr);
 main(){
     struct node *root=NULL, *ptr;
     int choice, k;
@@ -16,6 +25,9 @@ main(){
         printf("1.Recursive Preorder Traversal\n");
         printf("2.Recursive Inorder Traversal\n");
         printf("3.Recursive Postorder Traversal\n");
+        printf("4.Non-Recursive Preorder Traversal\n");
+        printf("5.Non-Recursive Inorder Traversal\n");
+        printf("6.Non-Recursive Postorder Traversal\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch (choice)
@@ -30,7 +42,14 @@ main(){
             postorder(root);
             break;
         case 4:
-            exit(1);
+            preorder_nrec(root);
+            break;
+        case 5: 
+            inorder_nrec(root);
+            break;
+        case 6: 
+            postorder_nrec(root);
+            break;
         default:
             printf("Wrong choice\n");
         }
@@ -62,4 +81,52 @@ void postorder(struct node *ptr){
     postorder(ptr->lchild);
     postorder(ptr->rchild);
     printf("%d", ptr->info);
+}
+
+void push_stack(struct node *item){
+    if(top == (MAX - 1)){
+        printf("Stack overflow\n");
+        return;
+    }
+    top = top + 1;
+    stack[top]=item;
+}
+struct node *pop_stack(){
+    struct node *item;
+    if(top==-1){
+        printf("Stack Underflow\n");
+        exit(1);
+    }
+    item = stack[top];
+    top = top - 1;
+    return item;
+}
+int stack_empty() {
+    if(top == -1)
+        return 1;
+    else
+        return 0;
+}
+
+void preorder_nrec(struct node *root){
+    struct node *ptr=root;
+    if(ptr== NULL)
+    {
+        printf("Tree is empty\n");
+        return;
+    }
+    push_stack(ptr);
+    while(!stack_empty()){
+        ptr = pop_stack();
+        printf("%d", ptr->info);
+        if(ptr->lchild != NULL)
+            push_stack(ptr->lchild);
+        if(ptr->rchild!= NULL)
+            push_stack(ptr->rchild);
+    }
+    printf("\n");
+}
+
+void inorder_nrec(struct node *root){
+    
 }
