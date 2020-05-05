@@ -7,6 +7,8 @@ struct node {
     struct node *rchild;
 };
 struct node *stack[MAX];
+struct node *queue[MAX];
+int front = -1, rear = -1;
 int top = -1;
 void push_stack(struct node *item);
 struct node *pop_stack();
@@ -17,6 +19,10 @@ void postorder(struct node *ptr);
 void preorder_nrec(struct node *ptr);
 void inorder_nrec(struct node *ptr);
 void postorder_nrec(struct node *ptr);
+void insert_queue(struct node *item);
+struct node *del_queue();
+int queue_empty();
+void level_trav(struct node *root);
 main(){
     struct node *root=NULL, *ptr;
     int choice, k;
@@ -28,6 +34,7 @@ main(){
         printf("4.Non-Recursive Preorder Traversal\n");
         printf("5.Non-Recursive Inorder Traversal\n");
         printf("6.Non-Recursive Postorder Traversal\n");
+        printf("&.Level order traversal\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch (choice)
@@ -49,6 +56,9 @@ main(){
             break;
         case 6: 
             postorder_nrec(root);
+            break;
+        case 7:
+            level_trav(root);
             break;
         default:
             printf("Wrong choice\n");
@@ -171,6 +181,53 @@ void postorder_nrec(struct node *root){
         }
         push_stack(ptr);
         ptr = ptr->rchild;
+    }
+    printf("\n");
+}
+
+void insert_queue(struct node *item){
+    if(rear == MAX-1){
+        printf("Queue overflow\n");
+        return;
+    }
+    if(front == -1)
+        front = 0;
+    rear = rear+1;
+    queue[rear]=item;
+}
+
+struct node *del_queue(){
+    struct node *item;
+    if(front == -1 || front == rear+1){
+        printf("Queue Underlow\n");
+        return 0;
+    }
+    item = queue[front];
+    front = front + 1;
+    return item;
+}
+
+int queue_empty(){
+    if(front == -1 || front == rear+1)
+        return 1;
+    else
+        return 0;
+}
+
+void level_trav(struct node *root){
+    struct node *ptr = root;
+    if(ptr == NULL){
+        printf("Tree is empty\n");
+        return;
+    }
+    insert_queue(ptr);
+    while(!queue_empty()){
+        ptr = del_queue();
+        printf("%d", ptr->info);
+        if(ptr->lchild!=NULL)
+            insert_queue(ptr->lchild);
+        if(ptr->rchild!=NULL)
+            insert_queue(ptr->rchild);
     }
     printf("\n");
 }
