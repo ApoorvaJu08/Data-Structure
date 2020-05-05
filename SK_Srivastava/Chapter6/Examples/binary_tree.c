@@ -119,10 +119,10 @@ void preorder_nrec(struct node *root){
     while(!stack_empty()){
         ptr = pop_stack();
         printf("%d", ptr->info);
-        if(ptr->lchild != NULL)
-            push_stack(ptr->lchild);
-        if(ptr->rchild!= NULL)
+        if(ptr->rchild != NULL)
             push_stack(ptr->rchild);
+        if(ptr->lchild!= NULL)
+            push_stack(ptr->lchild);
     }
     printf("\n");
 }
