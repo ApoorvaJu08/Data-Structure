@@ -128,5 +128,49 @@ void preorder_nrec(struct node *root){
 }
 
 void inorder_nrec(struct node *root){
-    
+    struct node *ptr = root;
+    if(ptr == NULL){
+        printf("Tree is empty\n");
+        return;
+    }
+    while(1){
+        while(ptr->lchild != NULL){
+            push_stack(ptr);
+            ptr = ptr->lchild;
+        }
+        while(ptr->rchild == NULL){
+            printf("%d", ptr->info);
+            if(stack_empty())
+                return;
+            ptr = pop_stack();
+        }
+        printf("%d", ptr->info);
+        ptr = ptr->rchild;
+    }
+    printf("\n");
+}
+
+void postorder_nrec(struct node *root){
+    struct node *q, *ptr = root;
+    if(ptr == NULL){
+        printf("Tree is empty\n");
+        return;
+    }
+    q = root;
+    while(1){
+        while(ptr->lchild != NULL){
+            push_stack(ptr);
+            ptr = ptr-> lchild;
+        }
+        while(ptr->rchild == NULL || ptr->rchild == q){
+            printf("%d", ptr->info);
+            q = ptr;
+            if(stack_empty())
+                return;
+            ptr = pop_stack();
+        }
+        push_stack(ptr);
+        ptr = ptr->rchild;
+    }
+    printf("\n");
 }
