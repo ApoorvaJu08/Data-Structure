@@ -6,6 +6,10 @@ struct node {
     int info;
     struct node *rchild;
 };
+struct listnode {
+    int info;
+    struct listnode *next;
+};
 struct node *stack[MAX];
 struct node *queue[MAX];
 int front = -1, rear = -1;
@@ -20,6 +24,7 @@ void preorder_nrec(struct node *ptr);
 void inorder_nrec(struct node *ptr);
 void postorder_nrec(struct node *ptr);
 void insert_queue(struct node *item);
+struct node *construct_pre(struct listnode *inptr, struct listnode *preptr, int num);
 struct node *del_queue();
 int queue_empty();
 void level_trav(struct node *root);
@@ -34,7 +39,8 @@ main(){
         printf("4.Non-Recursive Preorder Traversal\n");
         printf("5.Non-Recursive Inorder Traversal\n");
         printf("6.Non-Recursive Postorder Traversal\n");
-        printf("&.Level order traversal\n");
+        printf("7.Level order traversal\n");
+        printf("8.Create Binary tree from inorder and preorder\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch (choice)
@@ -60,6 +66,8 @@ main(){
         case 7:
             level_trav(root);
             break;
+        // case 8:
+        //     construct_pre();
         default:
             printf("Wrong choice\n");
         }
