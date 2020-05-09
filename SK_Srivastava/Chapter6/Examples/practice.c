@@ -102,5 +102,24 @@ void preorder(struct treenode *root){
 }
 
 void inorder(struct treenode *root){
-
+    struct treenode *ptr = root;
+    if(ptr == NULL){
+        printf("Tree is empty\n");
+        return;
+    }
+    while(1){
+        while(ptr->lchild != NULL){
+            push_stack(ptr);
+            ptr = ptr -> lchild;
+        }
+        while(ptr -> rchild == NULL){
+            printf("%d", ptr->info);
+            if(stack_empty())
+                return;
+            ptr = pop();
+        }
+        printf("%d", ptr->info);
+        ptr = ptr->rchild;
+    }
+    printf("\n");
 }
