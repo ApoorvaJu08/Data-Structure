@@ -21,6 +21,7 @@ struct treenode *stack[MAX];
 int top = -1;
 struct listnode *preptr = NULL;
 struct listnode *inptr = NULL;
+struct listnode *postptr = NULL;
 struct treenode *create();
 void display(struct listnode *start);
 int count(struct listnode *start);
@@ -192,6 +193,31 @@ void inorder(struct treenode *root){
     printf("\n");
 }
 
+void postorder_nrec(struct treenode *root){
+    struct treenode *q, *ptr = root;
+    if(ptr == NULL){
+        printf("Tree is empty\n");
+        return;
+    }
+    q = root;
+    while(1){
+        while(ptr->lchild != NULL){
+            push_stack(ptr);
+            ptr = ptr-> lchild;
+        }
+        while(ptr->rchild == NULL || ptr->rchild == q){
+            printf("%d", ptr->info);
+            q = ptr;
+            if(stack_empty())
+                return;
+            ptr = pop_stack();
+        }
+        push_stack(ptr);
+        ptr = ptr->rchild;
+    }
+    printf("\n");
+}
+
 struct treenode *construct_pre(struct listnode *inptr, struct listnode *preptr, int num){
     struct treenode *temp;
     struct listnode *q;
@@ -212,5 +238,30 @@ struct treenode *construct_pre(struct listnode *inptr, struct listnode *preptr, 
     for(j = 1; j <= i+1; j++)
         preptr = preptr->next;
     temp->rchild = construct_pre(q->next, preptr, num-i-1);
+    return temp;
+}
+
+struct treenode *construct_post(struct listnode *inptr, struct listnode *potptr, int num){
+    struct treenode *temp;
+    struct listnode *q, *ptr;
+    int i, j;
+    if(num == 0)
+        return NULL;
+    ptr = postptr;
+    for(i = 1; i < num; i++)
+        ptr = ptr->next;
+    temp = (struct treenode *)malloc(sizeof(struct treenode));
+    temp -> info = ptr->info;
+    temp->lchild = NULL;
+    temp->rchild = NULL;
+    if(num == 1)
+        return temp;
+    q = inptr;
+    for(i = 0; q->info != ptr->info; i++)
+        q = q->next;
+    temp->lchild = construct_post(inptr, postptr, num);
+    for(j = 1; j <= i; j++)
+        postptr = postptr->next;
+    temp->rchild = construct_post(q->next, postptr, num-i-1);
     return temp;
 }
