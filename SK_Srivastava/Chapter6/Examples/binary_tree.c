@@ -28,6 +28,7 @@ struct node *construct_pre(struct listnode *inptr, struct listnode *preptr, int 
 struct node *del_queue();
 int queue_empty();
 void level_trav(struct node *root);
+int height(struct node *ptr);
 main(){
     struct node *root=NULL, *ptr;
     int choice, k;
@@ -41,6 +42,7 @@ main(){
         printf("6.Non-Recursive Postorder Traversal\n");
         printf("7.Level order traversal\n");
         printf("8.Create Binary tree from inorder and preorder\n");
+        printf("9.Print height of the tree\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch (choice)
@@ -68,6 +70,8 @@ main(){
             break;
         // case 8:
         //     construct_pre();
+        case 9: 
+            height(root);
         default:
             printf("Wrong choice\n");
         }
@@ -238,4 +242,16 @@ void level_trav(struct node *root){
             insert_queue(ptr->rchild);
     }
     printf("\n");
+}
+
+int height(struct node *ptr){
+    int h_left, h_right;
+    if(ptr == NULL)
+        return 0;
+    h_left = height(ptr->lchild);
+    h_right = height(ptr->rchild);
+    if(h_left > h_right)
+        return 1 + h_left;
+    else
+        return 1 + h_right;
 }
