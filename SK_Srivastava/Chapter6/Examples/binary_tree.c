@@ -23,6 +23,7 @@ void postorder(struct node *ptr);
 void preorder_nrec(struct node *ptr);
 void inorder_nrec(struct node *ptr);
 void postorder_nrec(struct node *ptr);
+void postorder2(struct node *root);
 void insert_queue(struct node *item);
 struct node *construct_pre(struct listnode *inptr, struct listnode *preptr, int num);
 struct node *del_queue();
@@ -195,6 +196,26 @@ void postorder_nrec(struct node *root){
         ptr = ptr->rchild;
     }
     printf("\n");
+}
+
+void postorder2(struct node *root){
+    struct node *current = root;
+    struct node *ptr;
+    if(current == NULL){
+        printf("Tree is empty\n");
+        return;
+    }
+    push_stack(current);
+    while (current != NULL && !stack_empty())
+    {
+        while(current->lchild != NULL){
+            current = current -> lchild;
+            push_stack(current);
+        }   
+        current = NULL;
+        
+    }
+    
 }
 
 void insert_queue(struct node *item){
